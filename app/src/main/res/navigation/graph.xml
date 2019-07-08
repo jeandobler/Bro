@@ -2,8 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/graph"
-            app:startDestination="@id/loginFragment">
+            app:startDestination="@id/mainFragment">
 
     <fragment android:id="@+id/loginFragment" android:name="com.dobler.bro.ui.login.LoginFragment"
               android:label="login_fragment" tools:layout="@layout/login_fragment"/>
+    <fragment android:id="@+id/mainFragment" android:name="com.dobler.bro.ui.main.MainFragment"
+              android:label="MainFragment"/>
 </navigation>

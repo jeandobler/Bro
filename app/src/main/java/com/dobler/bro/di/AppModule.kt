@@ -1,8 +1,9 @@
 package com.dobler.bro.di
 
-import com.dobler.bro.Repository.UserRepository
 import com.dobler.bro.api.BroService
+import com.dobler.bro.interactor.GetUsersInteractor
 import com.dobler.bro.ui.login.LoginViewModel
+import com.dobler.bro.ui.main.MainViewModel
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -21,14 +22,13 @@ object AppModule {
         }
     }
 
-    val repositoriesModule = module {
-
-        single { UserRepository(get()) }
+    val interactorModule = module {
+        single { GetUsersInteractor(get()) }
     }
-
 
     val vieModelModule = module {
         viewModel { LoginViewModel(get()) }
+        viewModel { MainViewModel(get()) }
     }
 
     private fun initRetrofit(): Retrofit {

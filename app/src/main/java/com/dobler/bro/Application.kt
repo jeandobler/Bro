@@ -17,9 +17,9 @@ class Application : Application() {
                 listOf(
 //                    AppModule.rxModule,
                     AppModule.vieModelModule,
-                    AppModule.repositoriesModule,
+                    AppModule.interactorModule,
                     AppModule.apiModule
-//                    AppModule.repositoriesModule
+//                    AppModule.interactorModule
                 )
             )
         }

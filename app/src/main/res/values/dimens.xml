@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="margin_small_spacing">4dp</dimen>
+    <dimen name="margin_spacing_layout">8dp</dimen>
     <dimen name="margin_layout">16dp</dimen>
     <dimen name="login_margin_top">48dp</dimen>
 </resources>

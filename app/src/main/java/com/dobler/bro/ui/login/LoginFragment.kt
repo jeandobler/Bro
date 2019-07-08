@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.dobler.bro.databinding.LoginFragmentBinding
+import com.dobler.bro.vo.Error
+import com.dobler.bro.vo.Loading
+import com.dobler.bro.vo.Success
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -27,7 +30,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = LoginFragmentBinding.inflate(layoutInflater)
-//        val view = inflater.inflate(R.layout.login_fragment, container, false)
 
         (activity as AppCompatActivity).supportActionBar!!.hide()
 
@@ -36,25 +38,53 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-
 
         binding.btLogin.setOnClickListener {
-            binding.pbLogin.visibility = View.VISIBLE
-            binding.tvError.text = "Wrong credentials!"
-            binding.tvError.visibility = View.VISIBLE
-            binding.btLogin.visibility = View.INVISIBLE
-
-            viewModel.users.observe(this, Observer {
-                Log.e("LoginFragment", it[1].avatar)
-            })
-
-//            Thread.sleep(1000)
-//            binding.pbLogin.visibility = View.GONE
-//            binding.btLogin.visibility = View.VISIBLE
+            viewModel.fetchUsersByUsernameAndPassword(
+                binding.etLogin.text.toString(),
+                binding.etPassword.text.toString()
+            )
         }
+
+        loginAction()
 
     }
 
+    private fun loginAction() {
+        viewModel.users.observe(this, Observer { response ->
+
+            when (response) {
+
+                is Success -> {
+                    binding.pbLogin.visibility = View.INVISIBLE
+                    binding.btLogin.visibility = View.VISIBLE
+
+                    binding.tvError.apply {
+                        visibility = View.INVISIBLE
+                        text = ""
+                    }
+                    Log.e("LoginFragment", "Success")
+                }
+                is Error -> {
+                    binding.tvError.apply {
+                        visibility = View.VISIBLE
+                        text = "Wrong credentials!"
+                    }
+
+                    binding.pbLogin.visibility = View.INVISIBLE
+                    binding.btLogin.visibility = View.VISIBLE
+
+                    Log.e("LoginFragment", "Error")
+                }
+                is Loading -> {
+                    binding.pbLogin.visibility = View.VISIBLE
+                    binding.btLogin.visibility = View.INVISIBLE
+                    Log.e("LoginFragment", "Loading")
+                }
+            }
+
+        })
+
+    }
 
 }
