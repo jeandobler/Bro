@@ -2,10 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/graph"
-            app:startDestination="@id/mainFragment">
+            app:startDestination="@id/MainDestination">
 
-    <fragment android:id="@+id/loginFragment" android:name="com.dobler.bro.ui.login.LoginFragment"
+    <fragment android:id="@+id/LoginDestination" android:name="com.dobler.bro.ui.login.LoginFragment"
               android:label="login_fragment" tools:layout="@layout/login_fragment"/>
-    <fragment android:id="@+id/mainFragment" android:name="com.dobler.bro.ui.main.MainFragment"
-              android:label="MainFragment"/>
+    <fragment android:id="@+id/MainDestination" android:name="com.dobler.bro.ui.main.MainFragment"
+              android:label="MainFragment">
+        <action android:id="@+id/action_mainFragment_to_contactFragment" app:destination="@id/ContactDestination"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+                app:launchSingleTop="false" app:popUpTo="@+id/LoginDestination" app:popUpToInclusive="false"/>
+    </fragment>
+
+    <fragment android:id="@+id/ContactDestination" android:name="com.dobler.bro.ui.contact.ContactFragment"
+              android:label="ContactFragment">
+        <argument android:name="user" app:argType="com.dobler.bro.vo.User"/>
+    </fragment>
 </navigation>

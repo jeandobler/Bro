@@ -1,6 +1,7 @@
 package com.dobler.bro.ui.main
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -39,6 +40,10 @@ class MainListAdapter(private val onClick: (User) -> Unit) :
                 .into(holder.itemView.ivAvatar)
 
             holder.bind(user)
+            holder.itemView.setOnClickListener(View.OnClickListener {
+                onClick(user)
+            })
+
 
         }
     }
