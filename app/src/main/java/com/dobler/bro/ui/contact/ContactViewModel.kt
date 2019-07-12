@@ -14,13 +14,13 @@ class ContactViewModel(val interactor: UpdateUserInteractor) : ViewModel() {
     private val usersEvent = LiveEvent<ResponseState<User>>()
     val user: LiveData<ResponseState<User>> = usersEvent
 
-    var currentBro: Int? = null
+    var currentUser: User? = null
 
-    fun updateBroCount(user: User) {
+    fun updateBroCount(user: User, newBroValue : Int) {
         GlobalScope.launch {
             try {
                 usersEvent.postValue(Loading())
-                val response = interactor.execute(user, currentBro?.plus(1))
+                val response = interactor.execute(user, newBroValue)
 
                 usersEvent.postValue(Success(response))
 

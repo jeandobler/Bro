@@ -29,8 +29,24 @@ class MainFragment : Fragment() {
         binding = MainFragmentBinding.inflate(layoutInflater)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        mainListStart()
+
+
+        loadData()
+
+        userListner()
+        refreshListListener()
+
         return binding.root
+    }
+
+    private fun refreshListListener() {
+        binding.srLoadingList.setOnRefreshListener {
+            loadData()
+        }
+    }
+
+    private fun loadData() {
+        viewModel.fetchUsers()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,21 +67,28 @@ class MainFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun mainListStart() {
+
+    private fun userListner() {
         viewModel.users.observe(this, androidx.lifecycle.Observer { response ->
 
             when (response) {
-
                 is Success -> {
                     mainListAdapter.setData(response.data)
+                    binding.pbLoading.visibility = View.GONE
+                    binding.srLoadingList.isRefreshing = false
                 }
                 is Error -> {
                     mainListAdapter.clearAdapter()
+                    binding.pbLoading.visibility = View.GONE
+                    binding.tvError.visibility = View.VISIBLE
+                    binding.srLoadingList.isRefreshing = false
                 }
                 is Loading -> {
+                    binding.tvError.visibility = View.GONE
+                    binding.pbLoading.visibility = View.VISIBLE
                 }
             }
         })
-        viewModel.fetchUsers()
+
     }
 }

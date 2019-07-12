@@ -1,11 +1,13 @@
 # Bro App
  
-This is a study app that u can send a "u are my Bro" to a friend in a list
+This is a study app inspired in a great success app in "Silicon Valley" series that u can send a "u are my Bro" to a friend in a list
+  
+
 
 ## tasks
 
 - [ ] Login
--- [ ] Ui
+-- [X] Ui
 -- [ ] Data
 -- [ ] Test
 
@@ -14,10 +16,10 @@ This is a study app that u can send a "u are my Bro" to a friend in a list
 -- [ ] Data
 -- [ ] Test
 
-- [ ] Main
--- [ ] Ui
--- [ ] Data
+- [ X ] Main
+-- [X] Ui
+-- [X] Data
 -- [ ] Test
  
-- [ ] Bros Sent
+- [X] Bros Sent
  

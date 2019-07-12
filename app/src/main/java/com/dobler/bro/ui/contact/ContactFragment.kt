@@ -14,6 +14,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.dobler.bro.databinding.ContactFragmentBinding
 import com.dobler.bro.vo.Success
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.main_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -30,8 +32,9 @@ class ContactFragment : Fragment() {
     ): View? {
 
         binding = ContactFragmentBinding.inflate(inflater)
-        viewModel.currentBro = if (viewModel.currentBro == null) args.user.bro else viewModel.currentBro
-        binding.obj = args.user
+        viewModel.currentUser = if (viewModel.currentUser == null ) args.user  else viewModel.currentUser
+        binding.obj = viewModel.currentUser
+
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
@@ -60,7 +63,12 @@ class ContactFragment : Fragment() {
                 is Success -> {
                     binding.btSendBro.visibility = View.VISIBLE
                     binding.obj = response.data
-                    viewModel.currentBro  = response.data.bro
+                    viewModel.currentUser = response.data
+
+
+                    Snackbar.make(binding.root, "Bro Added", Snackbar.LENGTH_SHORT)
+                        .show()
+
                 }
                 else -> {
                     Timber.e("Error on send bro")
@@ -71,7 +79,7 @@ class ContactFragment : Fragment() {
 
     private fun onSendBroClick() {
         binding.btSendBro.setOnClickListener {
-            viewModel.updateBroCount(args.user)
+            viewModel.currentUser?.bro?.plus(1)?.let { it1 -> viewModel.updateBroCount(args.user, it1) }
             binding.btSendBro.visibility = View.INVISIBLE
         }
     }

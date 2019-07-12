@@ -17,5 +17,8 @@
     <fragment android:id="@+id/ContactDestination" android:name="com.dobler.bro.ui.contact.ContactFragment"
               android:label="ContactFragment">
         <argument android:name="user" app:argType="com.dobler.bro.vo.User"/>
+        <action android:id="@+id/backToMain" app:destination="@id/MainDestination"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 </navigation>

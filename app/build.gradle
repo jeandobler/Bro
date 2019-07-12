@@ -59,12 +59,17 @@ dependencies {
 
     implementation "com.github.hadilq.liveevent:liveevent:1.0.1"
 
+
+    // Core library
+    androidTestImplementation 'androidx.test:core:1.2.0'
+
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.fragment:fragment-testing:1.2.0-alpha01'
+
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
-
     // required if you want to use Mockito for unit tests
     testImplementation 'org.mockito:mockito-core:2.21.0'
 
@@ -75,7 +80,6 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
-
 
     // Koin for Kotlin
     implementation "org.koin:koin-core:$koin_version"
