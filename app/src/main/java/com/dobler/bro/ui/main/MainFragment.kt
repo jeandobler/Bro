@@ -14,7 +14,6 @@ import com.dobler.bro.vo.Loading
 import com.dobler.bro.vo.Success
 import com.dobler.bro.vo.User
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainFragment : Fragment() {
 
@@ -30,7 +29,7 @@ class MainFragment : Fragment() {
         binding = MainFragmentBinding.inflate(layoutInflater)
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-
+        mainListStart()
         return binding.root
     }
 
@@ -45,14 +44,9 @@ class MainFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = mainListAdapter
         }
-
-        mainListStart()
-
     }
 
     private fun onUserClick(user: User) {
-        Timber.e("userCLicked ${user.avatar}")
-//        val action = MainFragmentDirections.actionMainFragmentToContactFragment()
         val action = MainFragmentDirections.actionMainFragmentToContactFragment(user)
         findNavController().navigate(action)
     }

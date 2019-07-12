@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="obj" type="com.dobler.bro.vo.User"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.contact.ContactFragment">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:background="@color/colorPrimary"
+                app:titleTextColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <ImageView
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="@dimen/margin_layout"
+                android:id="@+id/ivAvatar"
+                android:layout_width="124dp" android:layout_height="124dp"/>
+
+        <TextView
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_margin="@dimen/margin_layout"
+                android:id="@+id/tvName"
+                android:text="@{obj.name}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="@dimen/margin_layout"
+                android:id="@+id/tvBro"
+                android:text="@{`Bro Times: `+obj.bro}"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+                android:layout_margin="@dimen/margin_layout"
+                android:layout_width="match_parent"
+                android:textSize="24sp"
+                android:id="@+id/btSendBro"
+                android:text="Bro"
+                android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

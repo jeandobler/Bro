@@ -1,33 +1,33 @@
 package com.dobler.bro.ui.main
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.dobler.bro.interactor.GetUsersInteractor
 import com.dobler.bro.vo.*
+import com.hadilq.liveevent.LiveEvent
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val interactor: GetUsersInteractor) : ViewModel() {
 
-    val users = MutableLiveData<ResponseState<List<User>>>()
+    private val usersEvent = LiveEvent<ResponseState<List<User>>>()
+    val users: LiveData<ResponseState<List<User>>> = usersEvent
 
     fun fetchUsers() {
         GlobalScope.launch {
             try {
-                users.postValue(Loading())
+
+                usersEvent.postValue(Loading())
                 val response = interactor.execute(null, null)
 
                 if (response.isNotEmpty()) {
-                    users.postValue(Success(response))
-                    Log.e("MainViewModel", "Success")
+                    usersEvent.postValue(Success(response))
                 } else {
-                    Log.e("MainViewModel", "not found")
-                    users.postValue(Error("Users not Found"))
+                    usersEvent.postValue(Error("Users not Found"))
                 }
 
             } catch (e: Exception) {
-                users.postValue(Error("Without Connection"))
+                usersEvent.postValue(Error("Without Connection"))
             }
         }
     }

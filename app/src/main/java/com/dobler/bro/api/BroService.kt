@@ -1,8 +1,7 @@
 package com.dobler.bro.api
 
 import com.dobler.bro.vo.User
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface BroService {
 
@@ -11,5 +10,9 @@ interface BroService {
         @Query("email") email: String?,
         @Query("password") password: String?
     ): List<User>
+
+    @FormUrlEncoded
+    @PUT("users/{id}")
+    suspend fun updateUser(@Path("id") id: Int, @Field("bro") bro: Int?): User
 
 }
