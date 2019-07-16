@@ -3,39 +3,46 @@ package com.dobler.bro
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.test.rule.ActivityTestRule
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.runner.AndroidJUnit4
 import com.dobler.bro.ui.main.MainFragment
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
-import org.mockito.Mockito.mock
+import org.mockito.Mockito
+import com.github.tomakehurst.wiremock.junit.WireMockRule
+import org.junit.Rule
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(JUnit4::class)
+
+@RunWith(AndroidJUnit4::class)
 class MainListTest {
 
-    @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    @Rule
+    @JvmField
+    var wireMockRule = WireMockRule(8089)
 
     @Test
-    fun testNavigationToInGameScreen() {
-
-        val mockNavController = mock(NavController::class.java)
-
+    fun onStartScreen_loadingMustBeDisplayed() {
+        val mockNavController = Mockito.mock(NavController::class.java)
         val titleScenario = launchFragmentInContainer<MainFragment>()
 
         titleScenario.onFragment { fragment ->
             Navigation.setViewNavController(fragment.requireView(), mockNavController)
         }
 
-//        Verify that performing a click prompts the correct Navigation action
-//        onView(ViewMatchers.withId(R.id.play_btn)).perform(ViewActions.click())
-//        verify(mockNavController).navigate(R.id.action_title_screen_to_in_game)
+        Espresso.onView(ViewMatchers.withId(R.id.pbLoading)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
+    @Test
+    fun onStartLoaded_ShowList() {
+        val mockNavController = Mockito.mock(NavController::class.java)
+        val titleScenario = launchFragmentInContainer<MainFragment>()
+
+        titleScenario.onFragment { fragment ->
+            Navigation.setViewNavController(fragment.requireView(), mockNavController)
+        }
+
+        Espresso.onView(ViewMatchers.withId(R.id.pbLoading)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
 }

@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="0dp"
-                android:layout_height="?actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/colorPrimary"
                 app:titleTextColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
                 app:layout_constraintTop_toBottomOf="@id/tvName"
                 android:layout_margin="@dimen/margin_layout"
                 android:layout_width="match_parent"

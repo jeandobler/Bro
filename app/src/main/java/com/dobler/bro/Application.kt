@@ -3,6 +3,7 @@ package com.dobler.bro
 import android.app.Application
 import com.dobler.bro.di.AppModule
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 
 
@@ -18,10 +19,12 @@ class Application : Application() {
 //                    AppModule.rxModule,
                     AppModule.vieModelModule,
                     AppModule.interactorModule,
-                    AppModule.apiModule
-//                    AppModule.interactorModule
+                    AppModule.apiModule,
+                    AppModule.networkModule
                 )
             )
         }
+
+
     }
 }

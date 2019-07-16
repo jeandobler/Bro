@@ -28,12 +28,11 @@ class MainFragment : Fragment() {
     ): View? {
         binding = MainFragmentBinding.inflate(layoutInflater)
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-
+        (activity as AppCompatActivity).setSupportActionBar(binding.mainToolbar)
 
         loadData()
 
-        userListner()
+        userListener()
         refreshListListener()
 
         return binding.root
@@ -68,7 +67,7 @@ class MainFragment : Fragment() {
     }
 
 
-    private fun userListner() {
+    private fun userListener() {
         viewModel.users.observe(this, androidx.lifecycle.Observer { response ->
 
             when (response) {

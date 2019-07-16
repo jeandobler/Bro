@@ -12,7 +12,7 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:paddingBottom="@dimen/margin_layout"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:id="@+id/srLoadingList"
@@ -32,7 +32,7 @@
         <ProgressBar
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
                 android:layout_margin="@dimen/margin_layout"
                 android:visibility="gone"
                 android:id="@+id/pbLoading"
@@ -43,7 +43,7 @@
                 android:layout_margin="@dimen/margin_layout"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
                 android:layout_width="wrap_content"
                 android:visibility="gone"
                 android:layout_height="wrap_content"
@@ -52,14 +52,17 @@
         />
 
         <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/mainToolbar"
                 android:layout_width="0dp"
-                android:layout_height="?actionBarSize"
+                android:layout_height="?android:attr/actionBarSize"
+
                 android:background="@color/colorPrimary"
                 app:titleTextColor="@color/white"
+
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

@@ -15,15 +15,24 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 object AppModule {
 
     val apiModule = module {
         single {
-            initRetrofit()
+            initHttp()
         }
         single {
             get<Retrofit>().create(BroService::class.java) as BroService
+        }
+    }
+
+    val networkModule = module {
+
+        single<RetrofitService> {
+            RetrofitServiceImplement(
+                get(),
+                "https://5d160d72df4e5f00145caa2b.mockapi.io/"
+            )
         }
     }
 
@@ -38,8 +47,11 @@ object AppModule {
         viewModel { ContactViewModel(get()) }
     }
 
-    private fun initRetrofit(): Retrofit {
+    private fun initHttp(): OkHttpClient {
         val httpBuilder = OkHttpClient.Builder()
+
+        httpBuilder.readTimeout(15, TimeUnit.SECONDS)
+        httpBuilder.connectTimeout(15, TimeUnit.SECONDS)
 
         val client =
             if (BuildConfig.DEBUG) {
@@ -50,16 +62,7 @@ object AppModule {
                 httpBuilder.build()
             }
 
-
-        httpBuilder.readTimeout(15, TimeUnit.SECONDS)
-        httpBuilder.connectTimeout(15, TimeUnit.SECONDS)
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://5d160d72df4e5f00145caa2b.mockapi.io/")
-            .client(client)
-
-            .addConverterFactory(GsonConverterFactory.create())
-
-        return retrofit.build()
+        return client
     }
+ 
 }
